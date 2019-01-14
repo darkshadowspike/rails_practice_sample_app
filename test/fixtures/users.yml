@@ -1,2 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+Andrew:
+
+  name: darkshadowspike
+  email: andrewmatosdiaz@hotmail.com
+  password_digest: <%= User.digest("hyperb312") %>
+

@@ -1,0 +1,25 @@
+<h1>Log in</h1>
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<form accept-charset="UTF-8" Action="login" method="POST">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+	    
+	    <label for="user_email">Email:</label>
+	    
+	    <input id="user_email" type="text" name="session[email]" class="form-control">
+	   
+
+	    <label for="user_pasword">Password:</label>
+	    
+	    <input id="user_pasword" type="password" name="session[password]" class="form-control">
+
+
+
+	    <input class ="btn btn-primary" name="commit"type="submit" value="Log in">	
+
+		</form>
+		<p>new user? <%= link_to "Sign up now!", signup_path %></p>
+	</div>	
+</div>

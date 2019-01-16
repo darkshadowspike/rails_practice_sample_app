@@ -6,18 +6,26 @@
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
 
 	    
-	    <label for="user_email">Email:</label>
+	    <label for="session_email">Email:</label>
 	    
-	    <input id="user_email" type="text" name="session[email]" class="form-control">
+	    <input id="session_email" type="text" name="session[email]" class="form-control">
 	   
 
-	    <label for="user_pasword">Password:</label>
+	    <label for="session_pasword">Password:</label>
 	    
-	    <input id="user_pasword" type="password" name="session[password]" class="form-control">
+	    <input id="session_pasword" type="password" name="session[password]" class="form-control">
+
+	    <label for="session_remember_me" class= "checkbox inline">
+	    	<input type ="checkbox" id="session_remember_me" name="session[remember_me]" >
+	    	<span>Remember me on this computer</span>
+	    </label>
+	    
 
 
+      
 
 	    <input class ="btn btn-primary" name="commit"type="submit" value="Log in">	
+
 
 		</form>
 		<p>new user? <%= link_to "Sign up now!", signup_path %></p>

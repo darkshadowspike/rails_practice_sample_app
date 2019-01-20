@@ -1,0 +1,26 @@
+     <%= render "shared/error_messages" %>
+		
+	     <!--<input name="_method" type="hidden" value="patch" /> -->
+	    <div class="<% if @user.errors.messages[:name].any? %>has-error<% end %>">
+			<label for="user_name">Username:</label>
+			<input id="user_name" type="text" name="user[name]"  class="form-control" value="<%=  @user.name%>">
+	    </div>
+
+	    <div class="<% if @user.errors.messages[:email].any? %>has-error<% end %>">
+			<label for="user_email">Email:</label>
+			<input id="user_email" type="text" name="user[email]" class="form-control" value="<%=  @user.email%>">
+	    </div>
+
+	    <div class="<% if @user.errors.messages[:password].any? %>has-error<% end %>">
+			<label for="user_password">Password:</label>
+			<input id="user_password" type="password" name="user[password]" value="" class="form-control">
+	    </div>
+        
+        <div class="<% if @user.errors.messages[:password].any? %>has-error<% end %>">
+			<label for="user_password_confirmation">confirmation:</label>
+			<input id="user_password_confirmation"
+			type="password" name="user[password_confirmation]" class="form-control">
+	    </div> 
+
+    <br>
+	<input class ="btn btn-primary" name="commit"type="submit" value="Create my account">

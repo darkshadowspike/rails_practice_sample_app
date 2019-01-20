@@ -19,7 +19,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     test 'login with valid information followed by logout' do
         get login_path
         assert_template 'sessions/new'
-        post login_path, params: { session:{email: @user.email, password: 'hyperb312'}}
+        post login_path, params: { session:{email: @user.email, password: 'pepeb312'}}
         assert_redirected_to @user
         follow_redirect!
         assert_template 'users/show'
@@ -39,16 +39,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     end
 
     test "login with remembering" do
-     log_in_as(@user,password: "hyperb312", remember_me: "1")
+     log_in_as(@user,password: "pepeb312", remember_me: "1")
      #assert_not_empty cookies["remember_token"]
      assert_equal cookies["remember_token"], assigns(:user).remember_token
     end
 
     test "login without remembering" do
      #log in to set the cookie
-     log_in_as(@user,password: "hyperb312", remember_me: "1")
+     log_in_as(@user,password: "pepeb312", remember_me: "1")
      #log in again and verity that the cookied is deleted
-     log_in_as(@user,password: "hyperb312", remember_me: "0")
+     log_in_as(@user,password: "pepeb312", remember_me: "0")
      assert_empty cookies['remember_token']
     end
 

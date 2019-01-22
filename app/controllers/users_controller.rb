@@ -12,9 +12,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-       flash[:success] ="User succesfully created!"
-       redirect_to user_url(@user)
+       @user.send_activation_email
+       flash.now[:info] ="Please check your email to activate your account"
+       render "account_activation"
     else
       #flash.now[:danger] ="User couldn't be created"
       render "new"
@@ -22,11 +22,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
   
   def show
   	@user = User.find(params[:id])
+    unless @user.activated?
+    redirect_to root_url and return
+    end
   	#debugger
   end
 
@@ -47,7 +50,7 @@ class UsersController < ApplicationController
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
-    redirect_to users_url
+    redirect_to users_url 
   end
 
    private
@@ -62,7 +65,7 @@ class UsersController < ApplicationController
     unless logged_in?
       store_location
       flash[:danger] = "Please log in."
-      redirect_to login_url
+      redirect_to login_url and return
     end
    end
 

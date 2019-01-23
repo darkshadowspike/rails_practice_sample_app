@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
  root 'static_pages#home'
  #get 'static_pages/help => root_url'
   get '/help', to: 'static_pages#help'

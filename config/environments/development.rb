@@ -59,9 +59,32 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
+ # config.action_mailer.raise_delivery_errors = true
+  #onfig.action_mailer.delivery_method = :send
 
   host = "localhost:3000"
-  config.action_mailer.default_url_options = {host: host, protocol: "http"}
+  #config.action_mailer.default_url_options = {host: host, protocol: "http"}
+  config.action_mailer.delivery_method = :sendmail
+# Defaults to:
+# config.action_mailer.sendmail_settings = {
+#   location: '/usr/sbin/sendmail',
+#   arguments: '-i'
+# }
+
+# Default Mailer Host
+Rails.application.routes.default_url_options[:host] = host
+Rails.application.routes.default_url_options[:protocol] = "http"
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.default_options = {from: 'testnonreply@gmail.com'}
+
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+address:              'smtp.gmail.com',
+port:                 587,
+domain:               "localhost:3000",
+user_name:            ENV['LOCAL_GMAIL_USERNAME'],
+password:             ENV['LOCAL_GMAIL_PASSWORD'],
+authentication:       'plain',
+enable_starttls_auto: true  }
 end

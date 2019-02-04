@@ -1,4 +1,4 @@
-     <%= render "shared/error_messages" %>
+     <%= render "shared/error_messages", object: @user %>
 		
 	     <!--<input name="_method" type="hidden" value="patch" /> -->
 	    <div class="<% if @user.errors.messages[:name].any? %>has-error<% end %>">

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	attr_accessor :remember_token, :activation_token, :reset_token
-
+  
     before_save :downcase_email
     before_create :create_activation_digest
 	validates(:name, :email, presence: true , length: {maximum: 50})
@@ -8,6 +8,7 @@ class User < ApplicationRecord
 	validates(:email, length: {maximum: 244} , format: {with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false})
     validates(:password, length:{ minimum: 6}, presence: true, allow_nil: true)
     has_secure_password 
+    has_many :microposts, dependent: :destroy
     
     # Returns the hash digest of the given string.
     def self.digest(string)
@@ -74,7 +75,10 @@ class User < ApplicationRecord
      self.reset_token = User.new_token
      update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
     end  
-
+  
+    def feed
+     Micropost.where("user_id = ?", id)
+    end
 
     private
 

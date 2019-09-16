@@ -53,6 +53,8 @@ module SessionsHelper
   end
 
   def store_location
+    #uses rails controllers request object
+    #if request get? method returns true , saves original url in a rails session cookie
     if request.get? 
     session[:forwarding_url] = request.original_url 
     end
